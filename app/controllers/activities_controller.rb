@@ -14,7 +14,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     def destroy
         activity = find_activity
         activity.destroy!
-        render json: {message: 'Activity deletion is successful'}, status: :no_content
+        head: no_content
     end
 
     private

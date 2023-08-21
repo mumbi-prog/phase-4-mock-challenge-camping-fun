@@ -13,14 +13,14 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def create
         camper = Camper.create!(camper_params)
-        render json: camper, exclude_activities: true, status: :created
+        render json: camper, status: :created
     end
 
     def update
         camper = find_camper
         camper.update!(camper_params)
         camper.save!
-        render json: camper, exclude_activities: true, status: :accepted
+        render json: camper, status: :accepted
     end
 
     def destroy
@@ -46,9 +46,5 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     def render_not_found_response
         render json: {error: 'Camper not found'}, status: :not_found
     end
-
-    # def render_camper_details(camper, status)
-    #     render json: camper, except: [:created_at, :updated_at], status: status
-    # end
 
 end
