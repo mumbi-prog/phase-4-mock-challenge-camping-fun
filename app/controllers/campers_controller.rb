@@ -3,12 +3,12 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
-        render json: Camper.all, exclude_activities: true, status: :ok
+        render json: Camper.all, status: :ok
     end
 
     def show
         camper = find_camper
-        render json: camper, include: :activities,  status: :ok
+        render json: camper, serializer: CamperShowSerializer,  status: :ok
     end
 
     def create
